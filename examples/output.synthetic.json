@@ -1,0 +1,12 @@
+[
+  {
+    "id": "DEMO-001",
+    "status": "NEEDS_REVIEW",
+    "verification": "NOT_VERIFIED",
+    "source_url": "https://example.org/labels/demo",
+    "file": null,
+    "sha256": null,
+    "synthetic": true,
+    "note": "Illustrative schema only; no real lookup or download occurred."
+  }
+]

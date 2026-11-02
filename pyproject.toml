@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drug-label-intelligence-agent"
+version = "0.1.0"
+description = "Agent-guided drug label retrieval workflow and offline provenance utilities"
+requires-python = ">=3.10"
+dependencies = ["pypdf>=5,<7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

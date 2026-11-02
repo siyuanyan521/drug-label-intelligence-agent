@@ -1,0 +1,10 @@
+[
+  {
+    "id": "DEMO-001",
+    "generic_name": "Synthetic compound A",
+    "brand": "ExampleBrand",
+    "dosage_form": "tablet",
+    "target_mah": "Example Research Ltd.",
+    "synthetic": true
+  }
+]
