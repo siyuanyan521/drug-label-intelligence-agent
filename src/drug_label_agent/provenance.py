@@ -47,3 +47,17 @@ def save_checkpoint(path, value):
     finally:
         if os.path.exists(temporary):
             os.unlink(temporary)
+
+
+def search_terms(name):
+    """Generate recall terms only; never change the target dosage form."""
+    import re
+    normalized = re.sub(r"\s+", "", name).replace("(", "（").replace(")", "）")
+    terms = [name]
+    if normalized != name:
+        terms.append(normalized)
+    if "紫杉醇" in normalized and "白蛋白" in normalized:
+        terms.extend(["注射用紫杉醇（白蛋白结合型）", "紫杉醇"])
+    elif "伊立替康" in normalized and "脂质体" in normalized:
+        terms.append("伊立替康")
+    return list(dict.fromkeys(terms))

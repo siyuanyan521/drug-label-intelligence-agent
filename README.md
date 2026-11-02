@@ -45,3 +45,6 @@ Do not commit real manifests, downloaded labels, private company material, crede
 
 ## License
 No open-source license has been selected yet. Public visibility alone does not grant reuse rights. Choose a license before inviting redistribution or contributions. No third-party skill package or CLI source is vendored.
+
+
+Updated rules: query expansion preserves target identity; professional-status authorization is task-scoped and requested upfront; missing brands are enriched from verified candidates before latest-date selection. Eleven offline tests pass; this is still not a complete live retrieval adapter.

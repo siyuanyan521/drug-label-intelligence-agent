@@ -30,3 +30,15 @@ class Tests(unittest.TestCase):
    p=Path(d)/'x.pdf';w=PdfWriter();w.add_blank_page(width=100,height=100)
    with p.open('wb') as f:w.write(f)
    result=inspect(p);self.assertEqual(result['pages'],1);self.assertFalse(result['has_extractable_text']);self.assertEqual(result['identity_status'],'NEEDS_REVIEW')
+
+class RecallTests(unittest.TestCase):
+ def test_albumin_recall_retains_original(self):
+  from drug_label_agent.provenance import search_terms
+  self.assertEqual(search_terms('白蛋白结合型紫杉醇'),['白蛋白结合型紫杉醇','注射用紫杉醇（白蛋白结合型）','紫杉醇'])
+ def test_liposomal_query_is_not_product_equivalence(self):
+  from drug_label_agent.provenance import search_terms
+  self.assertEqual(search_terms('盐酸伊立替康脂质体'),['盐酸伊立替康脂质体','伊立替康'])
+ def test_generic_only_can_reach_latest_selection(self):
+  from drug_label_agent.provenance import search_terms
+  self.assertEqual(search_terms('Synthetic compound'),['Synthetic compound','Syntheticcompound'])
+  self.assertEqual(latest_record([{'acceptance_date':'2020-01-01'},{'acceptance_date':'2024-01-01'}]),[{'acceptance_date':'2024-01-01'}])
