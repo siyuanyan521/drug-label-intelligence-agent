@@ -30,6 +30,11 @@ class Tests(unittest.TestCase):
    p=Path(d)/'x.pdf';w=PdfWriter();w.add_blank_page(width=100,height=100)
    with p.open('wb') as f:w.write(f)
    result=inspect(p);self.assertEqual(result['pages'],1);self.assertFalse(result['has_extractable_text']);self.assertEqual(result['identity_status'],'NEEDS_REVIEW')
+ def test_pdf_metadata_does_not_certify_source(self):
+  with tempfile.TemporaryDirectory() as d:
+   p=Path(d)/'metadata.pdf';w=PdfWriter();w.add_blank_page(width=100,height=100);w.add_metadata({'/Title':'Synthetic label','/Author':'Synthetic official claim'})
+   with p.open('wb')as f:w.write(f)
+   result=inspect(p);self.assertEqual(result['metadata']['/Title'],'Synthetic label');self.assertEqual(result['source_status'],'UNKNOWN');self.assertEqual(result['content_status'],'NEEDS_REVIEW');self.assertEqual(result['redistribution_status'],'UNKNOWN')
 
 class RecallTests(unittest.TestCase):
  def test_albumin_recall_retains_original(self):

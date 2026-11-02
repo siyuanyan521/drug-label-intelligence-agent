@@ -6,7 +6,7 @@ An agent-guided workflow for locating drug prescribing information with explicit
 
 ## Retrieval order
 1. Original product labels from NMPA/CDE.
-2. Original manufacturer's Chinese website; global manufacturer and regulator labels as explicitly foreign supplements.
+2. Original manufacturer's Chinese website; other regions' Chinese-body labels are separately identified. Foreign-language bodies are excluded by default.
 3. NMPA generic labels, then manufacturer websites and other freely downloadable sources. Always identify the actual generic manufacturer.
 
 ## Architecture
@@ -47,4 +47,10 @@ Do not commit real manifests, downloaded labels, private company material, crede
 No open-source license has been selected yet. Public visibility alone does not grant reuse rights. Choose a license before inviting redistribution or contributions. No third-party skill package or CLI source is vendored.
 
 
-Updated rules: query expansion preserves target identity; professional-status authorization is task-scoped and requested upfront; missing brands are enriched from verified candidates before latest-date selection. Eleven offline tests pass; this is still not a complete live retrieval adapter.
+## Chinese candidate discovery and adoption
+
+Priority ranks retrieval and adoption; it is not a domain allowlist. After priority sources fail to yield a qualifying Chinese label, broaden searches by generic name, brand, holder and approval number. Unknown public CDN PDFs remain candidates. Review access/use terms before fetching; never bypass paywalls, memberships, excluded databases (including DXY), or their mirrors.
+
+Track `file_status`, `content_status`, `source_status`, `access_status` and `redistribution_status` independently. A downloaded complete Chinese label may still have UNKNOWN provenance and require manual review. An English-body file is rejected for language, not queued for uncertain provenance. Free access does not establish redistribution rights. Default final adoption requires verified content/product identity, allowed access/use and evidenced official/institutional provenance. Third-party adoption requires an explicit project policy; UNKNOWN is never automatically adopted or published.
+
+The offline [source policy module](src/drug_label_agent/source_policy.py) constructs broad/trace queries and evaluates recorded evidence; it does not perform live provenance tracing or authenticate evidence. Local PDF inspection now exposes metadata and identity hints without certifying them. See the [source strategy](skills/drug-insert-retrieval/references/source-policy.md) and [test report](docs/TEST_RESULTS.md). No code automatically uploads PDFs to GitHub, including candidates with unknown sources. CDE latest-date selection, query expansion and task-scoped professional authorization remain in place.
